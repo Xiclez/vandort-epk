@@ -5,7 +5,6 @@ import { SplashScreen } from "./components/sections/SplashScreen";
 import { HeroSection } from "./components/sections/HeroSection";
 import { ScrollProgress } from "./components/visuals/ScrollProgress";
 import { GrainOverlay } from "./components/visuals/GrainOverlay";
-import { ShaderBackground } from "./components/visuals/ShaderBackground";
 import { MoonJourney } from "./components/visuals/MoonJourney";
 import { SectionTransition } from "./components/visuals/SectionTransition";
 import { useLanguage } from "./context/LanguageContext";
