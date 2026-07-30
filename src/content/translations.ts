@@ -62,7 +62,16 @@ export interface Dictionary {
     devNote: string;
   };
   gallery: { title: string; intro: string; closeLabel: string };
-  appearances: { title: string; intro: string; verifyNote: string };
+  appearances: {
+    title: string;
+    intro: string;
+    verifyNote: string;
+    galleryButton: string;
+    closeGallery: string;
+    enableSound: string;
+    disableSound: string;
+    noMedia: string;
+  };
   rider: {
     title: string;
     intro: string;
@@ -199,6 +208,12 @@ const es: Dictionary = {
     intro: "Una muestra de contextos y espacios recientes.",
     verifyNote:
       "Fechas, espacios y ciudades son de referencia y deben verificarse antes de producción.",
+    galleryButton: "Ver galería",
+    closeGallery: "Cerrar galería",
+    enableSound: "Activar sonido",
+    disableSound: "Silenciar video",
+    noMedia:
+      "La galería de esta presentación todavía no contiene archivos.",
   },
   rider: {
     title: "Rider técnico",
@@ -363,6 +378,12 @@ const en: Dictionary = {
     intro: "A sample of recent contexts and spaces.",
     verifyNote:
       "Dates, venues, and cities are for reference and must be verified before production.",
+    galleryButton: "View gallery",
+    closeGallery: "Close gallery",
+    enableSound: "Enable sound",
+    disableSound: "Mute video",
+    noMedia:
+      "The gallery for this appearance does not contain any files yet.",
   },
   rider: {
     title: "Technical rider",

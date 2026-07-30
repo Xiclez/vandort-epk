@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { Section } from "../layout/Section";
 import { SectionHeading } from "../ui/SectionHeading";
 import { AppearanceRow } from "../ui/AppearanceRow";
-import { appearances } from "../../content/artistData";
+import { AppearanceMediaModal } from "../ui/AppearanceMediaModal";
+import {
+  appearances,
+  type Appearance,
+} from "../../content/artistData";
 import { useLanguage } from "../../context/LanguageContext";
 
 export function AppearancesSection() {
   const { t } = useLanguage();
+
+  const [
+    selectedAppearance,
+    setSelectedAppearance,
+  ] = useState<Appearance | null>(null);
 
   return (
     <Section
@@ -24,15 +34,24 @@ export function AppearancesSection() {
 
         <ol className="mt-4 max-w-2xl">
           {appearances.map((item) => (
-            <AppearanceRow key={`${item.event}-${item.city}`} item={item} />
+            <AppearanceRow
+              key={item.id}
+              item={item}
+              onOpenGallery={
+                setSelectedAppearance
+              }
+            />
           ))}
         </ol>
-
-        <p className="font-meta mt-6 flex items-start gap-2 text-muted/80">
-          <AlertTriangle className="mt-0.5 h-3 w-3 flex-none" aria-hidden="true" />
-          {t.appearances.verifyNote}
-        </p>
       </div>
+
+      <AppearanceMediaModal
+        appearance={selectedAppearance}
+        open={selectedAppearance !== null}
+        onClose={() =>
+          setSelectedAppearance(null)
+        }
+      />
     </Section>
   );
 }

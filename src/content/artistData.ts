@@ -78,19 +78,353 @@ export const mixes: Mix[] = [
  * NOTE: All venues, cities and (future) dates MUST be verified with the artist
  * before production. Do not add awards, attendance figures, or press quotes.
  */
+export type AppearanceMediaType =
+  | "image"
+  | "video";
+
+export interface AppearanceMedia {
+  id: string;
+  type: AppearanceMediaType;
+  src: string;
+  poster?: string;
+  alt: Localized;
+
+  /**
+   * Optional ratio used to reserve video space before loading.
+   * Examples: "16 / 9", "9 / 16", "4 / 5", "1 / 1".
+   */
+  aspectRatio?: string;
+}
+
 export interface Appearance {
+  id: string;
   event: string;
   detail: Localized;
   city: string;
+  media: AppearanceMedia[];
 }
 
 export const appearances: Appearance[] = [
-  { event: "Éter", detail: { es: "DJ Set", en: "DJ Set" }, city: "Saltillo" },
-  { event: "Vamp Noir", detail: { es: "DJ Set", en: "DJ Set" }, city: "Monterrey" },
-  { event: "Summerween", detail: { es: "DJ Set", en: "DJ Set" }, city: "Cancún" },
-  { event: "Last Dark Dance", detail: { es: "DJ Set", en: "DJ Set" }, city: "CDMX" },
-  { event: "World Goth Day", detail: { es: "DJ Set", en: "DJ Set" }, city: "Cancún" },
-  { event: "Xmachinas", detail: { es: "DJ Set", en: "DJ Set" }, city: "Cancún" },
+  {
+    id: "eter",
+    event: "Éter",
+    detail: {
+      es: "23 Mayo 2026",
+      en: "May 23rd 2026",
+    },
+    city: "Saltillo",
+    media: [
+      {
+        id: "eter-photo-01",
+        type: "image",
+        src: "/media/appearances/eter/eter.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Eter",
+          en: "Photo of VANDORT performing at Eter",
+        },
+      },
+      {
+        id: "eter-vid-01",
+        type: "video",
+        src: "/media/appearances/eter/eter2.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en Eter",
+          en: "Video of VANDORT performing at Eter",
+        },
+      },
+
+      {
+        id: "eter-photo-02",
+        type: "image",
+        src: "/media/appearances/eter/eter3.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Eter",
+          en: "Photo of VANDORT performing at Eter",
+        },
+      },
+
+      {
+        id: "eter-vid-02",
+        type: "video",
+        src: "/media/appearances/eter/eter4.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en Eter",
+          en: "Video of VANDORT performing at Eter",
+        },
+      },
+      {
+        id: "eter-photo-03",
+        type: "image",
+        src: "/media/appearances/eter/eter5.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Eter",
+          en: "Photo of VANDORT performing at Eter",
+        },
+      },
+
+    ],
+  },
+  {
+    id: "vamp-noir",
+    event: "Vamp Noir",
+    detail: {
+      es: "30 Mayo 2026",
+      en: "May 30th 2026",
+    },
+    city: "Cancún",
+    media: [
+
+      {
+        id: "wgd-video-01",
+        type: "video",
+        src: "/media/appearances/vampnoir/wgd2.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en WGD After Party",
+          en: "Video of VANDORT performing at WGD After Party",
+        },
+      },
+      {
+        id: "wgd-video-02",
+        type: "video",
+        src: "/media/appearances/vampnoir/wgd3.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en WGD",
+          en: "Video of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-02",
+        type: "image",
+        src: "/media/appearances/vampnoir/wgd4.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-video-03",
+        type: "video",
+        src: "/media/appearances/vampnoir/wgd5.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en WGD",
+          en: "Video of VANDORT performing at WGD",
+        },
+      },
+    ],
+  },
+  {
+    id: "summerween",
+    event: "Summerween",
+    detail: {
+      es: "30 Agosto 2025",
+      en: "August 30th 2025",
+    },
+    city: "Monterrey",
+    media: [{
+      id: "sw-photo-01",
+      type: "image",
+      src: "/media/appearances/summerween/summerween.jpg",
+      alt: {
+        es: "Foto de VANDORT durante su presentación en Summerween",
+        en: "Photo of VANDORT performing at Summerween",
+      },
+    },
+    {
+      id: "sw-vid-01",
+      type: "video",
+      src: "/media/appearances/summerween/summerween2.mp4",
+      alt: {
+        es: "Video de VANDORT durante su presentación en Summerween",
+        en: "Video of VANDORT performing at Summerween",
+      },
+    },
+    {
+      id: "sw-vid-02",
+      type: "video",
+      src: "/media/appearances/summerween/summerween3.mp4",
+      alt: {
+        es: "Video de VANDORT durante su presentación en Summerween",
+        en: "Video of VANDORT performing at Summerween",
+      },
+    },
+    {
+      id: "sw-vid-03",
+      type: "video",
+      src: "/media/appearances/summerween/summerween4.mp4",
+      alt: {
+        es: "Video de VANDORT durante su presentación en Summerween",
+        en: "Video of VANDORT performing at Summerween",
+      },
+    },
+    {
+      id: "sw-vid-04",
+      type: "video",
+      src: "/media/appearances/summerween/summerween5.mp4",
+      alt: {
+        es: "Video de VANDORT durante su presentación en Summerween",
+        en: "Video of VANDORT performing at Summerween",
+      },
+    },
+  
+  ],
+  },
+  {
+    id: "last-dark-dance",
+    event: "Last Dark Dance",
+    detail: {
+      es: "27 Diciembre 2025",
+      en: "December 27th 2026",
+    },
+    city: "Monterrey",
+    media: [
+      {
+        id: "tldd-vid-01",
+        type: "video",
+        src: "/media/appearances/tldd/tldd.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en The Last Dark Dance",
+          en: "Video of VANDORT performing at The Last Dark Dance",
+        },
+      },
+      {
+        id: "tldd-photo-01",
+        type: "image",
+        src: "/media/appearances/tldd/tldd2.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en The Last Dark Dance",
+          en: "Photo of VANDORT performing at The Last Dark Dance",
+        },
+      },
+      {
+        id: "tldd-vid-02",
+        type: "video",
+        src: "/media/appearances/tldd/tldd3.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en The Last Dark Dance",
+          en: "Video of VANDORT performing at The Last Dark Dance",
+        },
+      },
+      {
+        id: "tldd-photo-02",
+        type: "image",
+        src: "/media/appearances/tldd/tldd4.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en The Last Dark Dance",
+          en: "Photo of VANDORT performing at The Last Dark Dance",
+        },
+      },
+      {
+        id: "tldd-photo-03",
+        type: "image",
+        src: "/media/appearances/tldd/tldd5.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en The Last Dark Dance",
+          en: "Photo of VANDORT performing at The Last Dark Dance",
+        },
+      },
+    ],
+  },
+  {
+    id: "world-goth-day",
+    event: "World Goth Day",
+    detail: {
+      es: "30 Mayo 2026",
+      en: "May 30th 2026",
+    },
+    city: "Cancún",
+    media: [
+      {
+        id: "wgd-photo-01",
+        type: "image",
+        src: "/media/appearances/wgd/wgd.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-03",
+        type: "image",
+        src: "/media/appearances/wgd/wgd6.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-04",
+        type: "image",
+        src: "/media/appearances/wgd/wgd7.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-05",
+        type: "image",
+        src: "/media/appearances/wgd/wgd8.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-06",
+        type: "image",
+        src: "/media/appearances/wgd/wgd9.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-07",
+        type: "image",
+        src: "/media/appearances/wgd/wgd10.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-video-04",
+        type: "video",
+        src: "/media/appearances/wgd/wgd11.mp4",
+        alt: {
+          es: "Video de VANDORT durante su presentación en WGD",
+          en: "Video of VANDORT performing at WGD",
+        },
+      },
+      {
+        id: "wgd-photo-08",
+        type: "image",
+        src: "/media/appearances/wgd/wgs12.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en WGD",
+          en: "Photo of VANDORT performing at WGD",
+        },
+      },
+    ],
+  },
+  {
+    id: "xmachinas",
+    event: "Xmachinas",
+    detail: {
+      es: "20 Septiembre 2025",
+      en: "September 20th 2025",
+    },
+    city: "Cancún",
+    media: [{
+      id: "xmac-video-04",
+      type: "video",
+      src: "/media/appearances/xmac/xmac.mp4",
+      alt: {
+        es: "Video de VANDORT durante su presentación en XMACHINAS",
+        en: "Video of VANDORT performing at XMACHINAS",
+      },
+    },],
+  },
 ];
 
 /** Editorial gallery slots — no real images at this stage. */
@@ -113,13 +447,11 @@ export const gallerySlots: GallerySlot[] = [
  * Do not turn these into live links until real values are provided.
  */
 export const booking = {
-  manager: "[BOOKING MANAGER]",
-  email: "[BOOKING EMAIL]",
-  whatsapp: "[WHATSAPP NUMBER]",
-  city: "[BASE CITY]",
+  email: "booking@dj-vandort.com",
+  whatsapp: "+52 998 246 3686",
+  city: "Monterrey, N.L, MX",
   social: {
-    instagram: "[INSTAGRAM URL]",
-    soundcloud: "[SOUNDCLOUD URL]",
-    youtube: "[YOUTUBE URL]",
+    instagram: "https://www.instagram.com/sadkronik",
+    soundcloud: "https://soundcloud.com/vandort-sadkronik",
   },
 } as const;

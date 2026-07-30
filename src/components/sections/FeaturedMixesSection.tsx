@@ -1,8 +1,9 @@
-import { ArrowRight } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Section } from "../layout/Section";
 import { SectionHeading } from "../ui/SectionHeading";
 import { MixRow } from "../ui/MixRow";
 import { PlaceholderButton } from "../ui/PlaceholderButton";
+import { artistLinks, artistLabels} from "../../content/artistLinks";
 import { mixes } from "../../content/artistData";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -25,13 +26,19 @@ export function FeaturedMixesSection() {
       </div>
 
       <div className="mt-12">
-        <PlaceholderButton
-          variant="secondary"
-          placeholder
-          icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}
-        >
-          {t.mixes.cta}
-        </PlaceholderButton>
+      <PlaceholderButton
+  variant="secondary"
+  href={artistLinks.soundcloud}
+  external
+  icon={
+    <ExternalLink
+      className="h-4 w-4"
+      aria-hidden="true"
+    />
+  }
+>
+  {t.mixes.cta}
+</PlaceholderButton>
       </div>
     </Section>
   );

@@ -6,7 +6,7 @@ import { PlaceholderButton } from "../ui/PlaceholderButton";
 import { useLanguage } from "../../context/LanguageContext";
 import { useReducedMotionPreference } from "../../hooks/useReducedMotionPreference";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
-
+import { artistLinks } from "../../content/artistLinks";
 /*
  * CONTENT NOTE: Technical requirements are placeholders and must be
  * confirmed with the artist before production.
@@ -49,17 +49,19 @@ export function TechnicalRiderSection() {
       </motion.div>
 
       <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center">
-        <PlaceholderButton
-          variant="secondary"
-          placeholder
-          icon={<Download className="h-4 w-4" aria-hidden="true" />}
-        >
-          {t.rider.downloadCta}
-        </PlaceholderButton>
-        <p className="font-meta flex items-start gap-2 text-muted/80">
-          <Info className="mt-0.5 h-3 w-3 flex-none" aria-hidden="true" />
-          {t.rider.note}
-        </p>
+      <PlaceholderButton
+  variant="primary"
+  href={artistLinks.riderPdf}
+  download="vandort-technical-rider.pdf"
+  icon={
+    <Download
+      className="h-4 w-4"
+      aria-hidden="true"
+    />
+  }
+>
+  {t.rider.downloadCta}
+</PlaceholderButton>
       </div>
     </Section>
   );

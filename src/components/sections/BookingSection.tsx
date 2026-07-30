@@ -3,10 +3,8 @@ import {
   Mail,
   MessageCircle,
   MapPin,
-  User,
   Instagram,
   Music2,
-  Youtube,
   Send,
   FileDown,
 } from "lucide-react";
@@ -18,19 +16,46 @@ import { booking } from "../../content/artistData";
 import { useLanguage } from "../../context/LanguageContext";
 import { useReducedMotionPreference } from "../../hooks/useReducedMotionPreference";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { artistLinks, artistLabels } from "../../content/artistLinks";
 
 export function BookingSection() {
   const { t } = useLanguage();
   const reduced = useReducedMotionPreference();
 
   const details = [
-    { icon: User, label: t.booking.managerLabel, value: booking.manager },
-    { icon: Mail, label: t.booking.emailLabel, value: booking.email },
-    { icon: MessageCircle, label: t.booking.whatsappLabel, value: booking.whatsapp },
-    { icon: MapPin, label: t.booking.cityLabel, value: booking.city },
-    { icon: Instagram, label: t.booking.instagramLabel, value: booking.social.instagram },
-    { icon: Music2, label: t.booking.soundcloudLabel, value: booking.social.soundcloud },
-    { icon: Youtube, label: t.booking.youtubeLabel, value: booking.social.youtube },
+    {
+      icon: Mail,
+      label: t.booking.emailLabel,
+      value: artistLabels.email,
+      href: `mailto:${artistLinks.email}`,
+      external: false,
+    },
+    {
+      icon: MessageCircle,
+      label: t.booking.whatsappLabel,
+      value: artistLabels.whatsapp,
+      href: artistLinks.whatsapp,
+      external: true,
+    },
+    {
+      icon: MapPin,
+      label: t.booking.cityLabel,
+      value: booking.city,
+    },
+    {
+      icon: Instagram,
+      label: t.booking.instagramLabel,
+      value: artistLabels.instagram,
+      href: artistLinks.instagram,
+      external: true,
+    },
+    {
+      icon: Music2,
+      label: t.booking.soundcloudLabel,
+      value: artistLabels.soundcloud,
+      href: artistLinks.soundcloud,
+      external: true,
+    },
   ];
 
   return (
@@ -72,36 +97,84 @@ export function BookingSection() {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              {details.map(({ icon: Icon, label, value }) => (
-                <motion.div
-                  key={label}
-                  variants={fadeUp(reduced)}
-                  className="flex items-start gap-3 bg-ink p-5"
-                >
-                  <Icon className="mt-1 h-4 w-4 flex-none text-blood-bright" aria-hidden="true" />
-                  <div>
-                    <dt className="font-meta text-muted">{label}</dt>
-                    <dd className="mt-1 break-words text-bone">{value}</dd>
-                  </div>
-                </motion.div>
-              ))}
+              {details.map(
+  ({
+    icon: Icon,
+    label,
+    value,
+    href,
+    external,
+  }) => (
+    <motion.div
+      key={label}
+      variants={fadeUp(reduced)}
+      className="flex items-start gap-3 bg-ink p-5"
+    >
+      <Icon
+        className="mt-1 h-4 w-4 flex-none text-blood-bright"
+        aria-hidden="true"
+      />
+
+      <div className="min-w-0">
+        <dt className="font-meta text-muted">
+          {label}
+        </dt>
+
+        <dd className="mt-1 break-words text-bone">
+          {href ? (
+            <a
+              href={href}
+              target={
+                external
+                  ? "_blank"
+                  : undefined
+              }
+              rel={
+                external
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+              className="underline decoration-bone/20 underline-offset-4 transition-colors hover:text-blood-bright hover:decoration-blood-bright"
+            >
+              {value}
+            </a>
+          ) : (
+            value
+          )}
+        </dd>
+      </div>
+    </motion.div>
+  ),
+)}
             </motion.dl>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <PlaceholderButton
-                variant="primary"
-                placeholder
-                icon={<Send className="h-4 w-4" aria-hidden="true" />}
-              >
-                {t.booking.primaryCta}
-              </PlaceholderButton>
-              <PlaceholderButton
-                variant="secondary"
-                placeholder
-                icon={<FileDown className="h-4 w-4" aria-hidden="true" />}
-              >
-                {t.booking.secondaryCta}
-              </PlaceholderButton>
+            <PlaceholderButton
+              variant="primary"
+              href={artistLinks.whatsapp}
+              external
+              icon={
+                <Send
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+              }
+            >
+              {t.booking.primaryCta}
+            </PlaceholderButton>
+            <PlaceholderButton
+              variant="secondary"
+              href={artistLinks.pressKitZip}
+              download="vandort-press-kit.zip"
+              icon={
+                <FileDown
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+              }
+            >
+              {t.booking.secondaryCta}
+            </PlaceholderButton>
             </div>
           </div>
         </div>
