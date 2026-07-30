@@ -3,7 +3,7 @@ import { Section } from "../layout/Section";
 import { SectionHeading } from "../ui/SectionHeading";
 import { MixRow } from "../ui/MixRow";
 import { PlaceholderButton } from "../ui/PlaceholderButton";
-import { artistLinks, artistLabels} from "../../content/artistLinks";
+import { artistLinks} from "../../content/artistLinks";
 import { mixes } from "../../content/artistData";
 import { useLanguage } from "../../context/LanguageContext";
 

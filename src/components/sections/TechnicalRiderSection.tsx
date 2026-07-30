@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download, Info } from "lucide-react";
+import { Download} from "lucide-react";
 import { Section } from "../layout/Section";
 import { SectionHeading } from "../ui/SectionHeading";
 import { PlaceholderButton } from "../ui/PlaceholderButton";
