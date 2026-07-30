@@ -336,34 +336,107 @@ export function ShaderBackground({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const pendingRelease = pendingContextReleases.get(canvas)
-    if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
-    pendingContextReleases.delete(canvas)
-    const gl = canvas.getContext("webgl", {
-        antialias: false,
-        alpha: false,
-        depth: false,
-        stencil: false,
-        preserveDrawingBuffer: false,
-        powerPreference: "low-power",
-      })
-      
-      if (!gl) return
-
-    const compile = (type: number, src: string) => {
-      const s = gl.createShader(type)!
-      gl.shaderSource(s, src)
-      gl.compileShader(s)
-      return s
+    const canvasElement = canvasRef.current
+  
+    if (!canvasElement) return
+  
+    const glContext = canvasElement.getContext("webgl", {
+      antialias: false,
+      alpha: false,
+      depth: false,
+      stencil: false,
+      preserveDrawingBuffer: false,
+      powerPreference: "low-power",
+    })
+  
+    if (!glContext) return
+  
+    /*
+     * Explicit non-null aliases.
+     * These remain safely typed inside render functions and cleanup closures.
+     */
+    const canvas: HTMLCanvasElement = canvasElement
+    const gl: WebGLRenderingContext = glContext
+  
+    const pendingRelease =
+      pendingContextReleases.get(canvas)
+  
+    if (pendingRelease !== undefined) {
+      window.clearTimeout(pendingRelease)
     }
-    const program = gl.createProgram()!
-    const vertexShader = compile(gl.VERTEX_SHADER, VERT)
-    const fragmentShader = compile(gl.FRAGMENT_SHADER, FRAG)
-    gl.attachShader(program, vertexShader)
-    gl.attachShader(program, fragmentShader)
-    gl.linkProgram(program)
+  
+    pendingContextReleases.delete(canvas)
+
+    const compile = (
+        type: number,
+        src: string,
+      ): WebGLShader => {
+        const shader = gl.createShader(type)
+      
+        if (!shader) {
+          throw new Error(
+            "Unable to create WebGL shader.",
+          )
+        }
+      
+        gl.shaderSource(shader, src)
+        gl.compileShader(shader)
+      
+        const compiled = gl.getShaderParameter(
+          shader,
+          gl.COMPILE_STATUS,
+        )
+      
+        if (!compiled) {
+          const error =
+            gl.getShaderInfoLog(shader) ??
+            "Unknown shader compilation error."
+      
+          gl.deleteShader(shader)
+      
+          throw new Error(error)
+        }
+      
+        return shader
+      }
+      const program = gl.createProgram()
+
+      if (!program) {
+        throw new Error(
+          "Unable to create WebGL program.",
+        )
+      }
+      
+      const vertexShader = compile(
+        gl.VERTEX_SHADER,
+        VERT,
+      )
+      
+      const fragmentShader = compile(
+        gl.FRAGMENT_SHADER,
+        FRAG,
+      )
+      
+      gl.attachShader(program, vertexShader)
+      gl.attachShader(program, fragmentShader)
+      gl.linkProgram(program)
+      
+      const linked = gl.getProgramParameter(
+        program,
+        gl.LINK_STATUS,
+      )
+      
+      if (!linked) {
+        const error =
+          gl.getProgramInfoLog(program) ??
+          "Unknown WebGL program linking error."
+      
+        gl.deleteShader(vertexShader)
+        gl.deleteShader(fragmentShader)
+        gl.deleteProgram(program)
+      
+        throw new Error(error)
+      }
     gl.deleteShader(vertexShader)
     gl.deleteShader(fragmentShader)
     gl.useProgram(program)
