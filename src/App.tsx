@@ -9,6 +9,8 @@ import { ShaderBackground } from "./components/visuals/ShaderBackground";
 import { MoonJourney } from "./components/visuals/MoonJourney";
 import { SectionTransition } from "./components/visuals/SectionTransition";
 import { useLanguage } from "./context/LanguageContext";
+import { PageShader } from "./components/visuals/PageShader";
+
 
 /* Below-the-fold sections are code-split to keep the initial payload light. */
 const AboutSection = lazy(() =>
@@ -50,29 +52,11 @@ export default function App() {
       </a>
 
       <SplashScreen />
-<ScrollProgress />
-
-<div
-  className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-  aria-hidden="true"
->
-  <ShaderBackground className="h-full w-full opacity-[0.38]" />
-
-  <div
-    className="absolute inset-0 bg-[rgba(5,5,5,0.34)]"
-    aria-hidden="true"
-  />
-
-  <div
-    className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,transparent_0%,rgba(5,5,5,0.12)_38%,rgba(5,5,5,0.62)_100%)]"
-    aria-hidden="true"
-  />
-</div>
-
+      <ScrollProgress />
+<PageShader />
 <GrainOverlay />
 <MoonJourney />
 <Navigation />
-
       <main id="main">
         <HeroSection />
         <SectionTransition variant="eclipse" marker="01" />

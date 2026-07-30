@@ -119,7 +119,7 @@ export function SplashScreen() {
   />
 </motion.div>
 
-          {!reduced && <BatField count={6} mode="splash" className="opacity-90" />}
+          {!reduced && <BatField count={10} mode="splash" className="opacity-90" />}
 
           <div className="absolute inset-x-6 top-6 z-10 flex items-center justify-between md:inset-x-10 md:top-8">
             <span className="font-meta text-muted/70">VDRT — EPK</span>

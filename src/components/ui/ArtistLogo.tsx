@@ -24,6 +24,7 @@ interface ArtistLogoProps {
           aria-hidden={decorative ? "true" : undefined}
           className={[
             "block h-auto w-full select-none",
+            "mix-blend-screen",
             imageClassName,
           ].join(" ")}
           loading={priority ? "eager" : "lazy"}

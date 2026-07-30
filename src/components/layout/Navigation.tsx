@@ -45,7 +45,7 @@ export function Navigation() {
 >
   <ArtistLogo
     decorative
-    className="w-[7.8rem] md:w-[9.5rem]"
+    className="w-[3.75rem] md:w-[4.75rem]"
     imageClassName="transition-[filter,opacity] duration-300 hover:opacity-80"
   />
 </a>

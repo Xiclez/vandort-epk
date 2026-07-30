@@ -27,69 +27,99 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 110]);
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1.02, reduced ? 1.02 : 1.1]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -54]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -28]);
-  const shadeOpacity = useTransform(scrollYProgress, [0, 0.75], [0.18, 0.68]);
-
+  const portraitY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduced ? 0 : 38],
+  );
+  
+  const portraitScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, reduced ? 1 : 1.03],
+  );
+  
+  const titleY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduced ? 0 : -20],
+  );
+  
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduced ? 0 : -14],
+  );
+  
+  const shadeOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.75],
+    [0.34, 0.5],
+  );
   return (
     <section
-      ref={ref}
-      id="hero"
-      aria-label={t.nav.home}
-      className="relative min-h-[108svh] overflow-hidden bg-transparent"
-    >
-      <SmokeLayer className="z-[2]" />
-
-      <motion.div
-        className="absolute inset-0 z-[2] bg-ink"
-        style={{ opacity: shadeOpacity }}
-        aria-hidden="true"
-      />
-
-      {/* Full-bleed media slot: intentionally oversized to create an editorial hero. */}
-      <motion.div
-        className="absolute inset-y-0 right-0 z-[3] w-full md:w-[64%]"
-        style={{ y: portraitY, scale: portraitScale }}
-        initial={{ opacity: 0, x: reduced ? 0 : 70 }}
-        animate={introReady ? { opacity: 0.9, x: 0 } : { opacity: 0, x: reduced ? 0 : 70 }}
-        transition={{ duration: reduced ? 0.35 : 1.1, ease: EASE_RITUAL }}
-      >
-        <div className="relative h-full w-full overflow-hidden">
-        <img
-  src="/images/vandort/hero-portrait.webp"
-  alt="VANDORT"
-  className="h-full w-full select-none object-cover object-[center_20%]"
-  loading="eager"
-  decoding="async"
-  draggable={false}
-/>
-
-  <div
+    ref={ref}
+    id="hero"
+    aria-label={t.nav.home}
+    className="relative min-h-[92svh] overflow-hidden bg-[#050505] md:min-h-[84svh]"
+  >
+  <motion.div
+    className="absolute inset-0 z-0 overflow-hidden"
+    style={{ y: portraitY, scale: portraitScale }}
+    initial={{ opacity: 0, x: reduced ? 0 : 28 }}
+    animate={
+      introReady
+        ? { opacity: 0.78, x: 0 }
+        : { opacity: 0, x: reduced ? 0 : 28 }
+    }
+    transition={{
+      duration: reduced ? 0.35 : 1.05,
+      ease: EASE_RITUAL,
+    }}
     aria-hidden="true"
-    className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent"
+  >
+    <img
+      src="/images/vandort/hero-portrait2.webp"
+      alt=""
+      className="h-full w-full select-none object-cover object-[center_18%] md:object-[center_20%]"
+      loading="eager"
+      decoding="async"
+      draggable={false}
+    />
+
+    <div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.97) 16%, rgba(5,5,5,0.78) 30%, rgba(5,5,5,0.38) 50%, rgba(5,5,5,0.12) 68%, rgba(5,5,5,0.18) 100%), linear-gradient(0deg, #050505 0%, rgba(5,5,5,0.24) 26%, rgba(5,5,5,0.08) 58%, rgba(5,5,5,0.26) 100%)",
+      }}
+    />
+
+    <div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          "radial-gradient(circle at 76% 38%, rgba(255,255,255,0.05), transparent 18%), radial-gradient(circle at 80% 44%, rgba(5,5,5,0), rgba(5,5,5,0.18) 42%, rgba(5,5,5,0.54) 72%)",
+      }}
+    />
+  </motion.div>
+
+  <SmokeLayer className="z-0 opacity-45" />
+
+  <motion.div
+    className="absolute inset-0 z-0 bg-ink"
+    style={{ opacity: shadeOpacity }}
+    aria-hidden="true"
   />
 
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"
+{introReady && !reduced && (
+  <BatField
+    count={4}
+    mode="hero"
+    className="z-10"
   />
-</div>
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.93) 12%, rgba(5,5,5,0.4) 43%, rgba(5,5,5,0.08) 72%), linear-gradient(0deg, #050505 0%, transparent 28%, rgba(5,5,5,0.18) 100%)",
-          }}
-          aria-hidden="true"
-        />
-      </motion.div>
-
-      {introReady && !reduced && <BatField count={5} mode="hero" className="z-[5] opacity-[0.85]" />}
-
-      <div className="section-shell relative z-10 flex min-h-[108svh] flex-col pb-24 pt-28 md:pb-28 md:pt-32">
-        <motion.div
+)}
+      <div className="section-shell relative z-10 flex min-h-[108svh] flex-col pb-24 pt-28 md:pb-28 md:pt-32">        <motion.div
           className="flex items-center gap-4"
           initial={{ opacity: 0, y: reduced ? 0 : 14 }}
           animate={introReady ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : 14 }}
@@ -101,7 +131,7 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-  className="relative z-20 mt-[10svh] w-[min(94vw,78rem)] md:mt-[7svh]"
+  className="relative z-20 mt-10 w-[min(58vw,13rem)] md:mt-8 md:w-[min(19vw,14rem)]"
   style={{ y: titleY }}
   initial={{
     opacity: 0,
@@ -123,7 +153,7 @@ export function HeroSection() {
         }
   }
   transition={{
-    duration: reduced ? 0.35 : 1.05,
+    duration: reduced ? 0.35 : 0.95,
     ease: EASE_RITUAL,
     delay: reduced ? 0 : 0.08,
   }}
@@ -134,68 +164,73 @@ export function HeroSection() {
     priority
     decorative
     className="w-full"
-    imageClassName="drop-shadow-[0_14px_48px_rgba(0,0,0,0.95)]"
+    imageClassName="drop-shadow-[0_4px_20px_rgba(0,0,0,0.86)]"
   />
 
   <motion.span
-    className="font-meta absolute -bottom-8 left-1 text-blood-bright md:left-2"
-    initial={{
-      opacity: 0,
-      width: 0,
-    }}
+    className="font-meta absolute -bottom-7 left-1 text-blood-bright md:left-2"
+    initial={{ opacity: 0, width: 0 }}
     animate={
       introReady
-        ? {
-            opacity: 1,
-            width: "auto",
-          }
-        : {
-            opacity: 0,
-            width: 0,
-          }
+        ? { opacity: 1, width: "auto" }
+        : { opacity: 0, width: 0 }
     }
     transition={{
-      duration: 0.75,
-      delay: 0.55,
+      duration: 0.7,
+      delay: 0.48,
     }}
   >
     {t.hero.ritualLabel}
   </motion.span>
 </motion.div>
 
-        <motion.div
-          className="mt-auto grid max-w-5xl grid-cols-1 items-end gap-8 pt-28 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-20"
-          style={{ y: contentY }}
-          initial={{ opacity: 0, y: reduced ? 0 : 22 }}
-          animate={introReady ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : 22 }}
-          transition={{ duration: 0.75, ease: EASE_RITUAL, delay: reduced ? 0 : 0.48 }}
-        >
+<motion.div
+  className="mt-12 grid max-w-5xl grid-cols-1 items-end gap-6 pt-10 md:mt-auto md:grid-cols-[1fr_1.1fr] md:gap-12 md:pt-16"
+  style={{ y: contentY }}
+  initial={{ opacity: 0, y: reduced ? 0 : 18 }}
+  animate={
+    introReady
+      ? { opacity: 1, y: 0 }
+      : { opacity: 0, y: reduced ? 0 : 18 }
+  }
+  transition={{
+    duration: 0.75,
+    ease: EASE_RITUAL,
+    delay: reduced ? 0 : 0.42,
+  }}
+>
           <div>
-          <p className="font-gothic max-w-2xl text-3xl font-medium leading-[0.98] tracking-[-0.015em] text-bone/85 md:text-5xl">
+          <p className="font-gothic max-w-[16ch] text-[2rem] leading-[0.96] tracking-[-0.02em] text-bone/[0.96] md:max-w-[18ch] md:text-[3.3rem]">
   {t.hero.statement}
 </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a
-                href="#mixes"
-                className="font-meta inline-flex min-h-12 items-center gap-2 bg-blood px-5 py-3 text-bone transition-colors hover:bg-blood-bright"
-              >
-                <Headphones className="h-4 w-4" aria-hidden="true" />
-                {t.hero.primaryCta}
-              </a>
-              <a
-                href="#booking"
-                className="font-meta inline-flex min-h-12 items-center gap-2 border border-bone/30 bg-ink/30 px-5 py-3 text-bone backdrop-blur-sm transition-colors hover:border-blood hover:bg-ink/60"
-              >
-                <CalendarClock className="h-4 w-4" aria-hidden="true" />
-                {t.hero.secondaryCta}
-              </a>
-            </div>
+<div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+  <a
+    href="#mixes"
+    className="font-meta inline-flex min-h-12 items-center justify-center gap-2 bg-blood px-5 py-3 text-bone transition-colors hover:bg-blood-bright"
+  >
+    <Headphones className="h-4 w-4" aria-hidden="true" />
+    {t.hero.primaryCta}
+  </a>
+
+  <a
+    href="#booking"
+    className="font-meta inline-flex min-h-12 items-center justify-center gap-2 border border-bone/30 bg-ink/44 px-5 py-3 text-bone backdrop-blur-sm transition-colors hover:border-blood hover:bg-ink/64"
+  >
+    <CalendarClock className="h-4 w-4" aria-hidden="true" />
+    {t.hero.secondaryCta}
+  </a>
+</div>
           </div>
 
-          <div className="border-l border-blood/50 pl-5 md:justify-self-end md:max-w-md">
-            <span className="font-meta text-blood-bright">{t.hero.rangeLabel}</span>
-            <p className="font-meta mt-3 leading-6 text-bone/70">{t.hero.genreLine}</p>
-          </div>
+          <div className="border-l border-blood/40 pl-4 md:justify-self-end md:max-w-sm">
+  <span className="font-meta text-blood-bright">
+    {t.hero.rangeLabel}
+  </span>
+
+  <p className="font-meta mt-3 max-w-[28rem] leading-6 text-bone/66">
+    {t.hero.genreLine}
+  </p>
+</div>
         </motion.div>
 
         <div
@@ -209,12 +244,12 @@ export function HeroSection() {
       </div>
 
       <motion.a
-        href="#about"
-        className="font-meta absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-muted"
-        initial={{ opacity: 0 }}
-        animate={introReady ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: reduced ? 0 : 1, duration: 0.6 }}
-      >
+  href="#about"
+  className="font-meta absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 text-muted md:flex"
+  initial={{ opacity: 0 }}
+  animate={introReady ? { opacity: 1 } : { opacity: 0 }}
+  transition={{ delay: reduced ? 0 : 1, duration: 0.6 }}
+>
         <span>{t.hero.scrollLabel}</span>
         <motion.span
           animate={reduced ? undefined : { y: [0, 6, 0] }}

@@ -35,14 +35,18 @@ export function BookingSection() {
 
   return (
     <Section
-      id="booking"
-      ariaLabel={t.booking.title}
-      sideLabel={t.nav.booking}
-      className="overflow-hidden bg-elevated"
-    >
+  id="booking"
+  ariaLabel={t.booking.title}
+  sideLabel={t.nav.booking}
+  className="overflow-visible bg-[rgba(11,11,13,0.76)]"
+>
       {/* The global MoonJourney reaches its final position here. */}
-      <BatField count={5} disperse className="z-[3] opacity-70" />
-
+      <BatField
+  count={7}
+  mode="ambient"
+  disperse
+  className="z-10"
+/>
       <div className="relative z-10">
         <SectionHeading index={8} title={t.booking.title} intro={t.booking.intro} />
 
