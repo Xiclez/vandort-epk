@@ -25,7 +25,7 @@ export const artistLinks = {
       "/media/docs/vandort-technical-rider.pdf",
   
     pressKitZip:
-      "/media/documents/vandort-press-kit.zip",
+      "/media/docs/vandort-press-kit.zip",
   } as const;
   
   export const artistLabels = {
