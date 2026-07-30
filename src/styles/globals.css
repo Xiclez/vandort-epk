@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Design system palette --- */
+  --color-bg: #050505;
+  --color-bg-elevated: #0b0b0d;
+  --color-surface: #111114;
+  --color-bone: #eee9e1;
+  --color-muted: #918d87;
+  --color-border: #28282c;
+  --color-blood: #9e1025;
+  --color-blood-bright: #d01832;
+  --color-blood-glow: rgba(158, 16, 37, 0.35);
+
+  /* --- Typography: local/system stacks only, no remote fonts --- */
+  --font-gothic:
+  "Grenze Gotisch Variable",
+  Georgia,
+  "Times New Roman",
+  serif;
+  --font-display: "Archivo Narrow", "Oswald", "Arial Narrow", "Helvetica Neue",
+    sans-serif;
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "Consolas", ui-monospace,
+    monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Headings default to the condensed uppercase display treatment */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin: 0;
+}
+.font-gothic {
+  font-family: var(--font-gothic);
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Metadata / technical labels */
+.font-meta {
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+/* --- Focus states: strong + visible --- */
+:focus-visible {
+  outline: 2px solid var(--color-blood-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 200;
+  background: var(--color-blood);
+  color: var(--color-bone);
+  padding: 0.75rem 1.25rem;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* --- CSS-only grain overlay --- */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: repeating-conic-gradient(
+    #fff 0deg 0.35deg,
+    #000 0.35deg 0.7deg
+  );
+  background-size: 3px 3px;
+}
+
+/* --- CSS-only smoke layer --- */
+.smoke-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(158, 16, 37, 0.12), transparent 70%),
+    radial-gradient(80% 60% at 20% 100%, rgba(11, 11, 13, 0.9), transparent 70%),
+    radial-gradient(80% 60% at 80% 90%, rgba(17, 17, 20, 0.8), transparent 70%);
+}
+
+/* --- Waveform decoration (pure CSS) --- */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 28px;
+}
+.waveform span {
+  flex: 1;
+  background: var(--color-border);
+  border-radius: 1px;
+  min-width: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+}
+
+.section-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding: 0 3rem;
+  }
+}
+
+/* Narrative layers: backgrounds remain below the global moon, content above it. */
+.section-shell {
+  position: relative;
+  z-index: 2;
+}
+
+.splash-vignette {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.72), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.72)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.84), transparent 34%, rgba(0, 0, 0, 0.36)),
+    radial-gradient(circle at center, transparent 16%, rgba(5, 5, 5, 0.36) 62%, #050505 100%);
+}
+
+@media (max-width: 767px) {
+  .grain-overlay {
+    opacity: 0.032;
+  }
+}
