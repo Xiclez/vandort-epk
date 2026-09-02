@@ -105,6 +105,7 @@ export interface Appearance {
 }
 
 export const appearances: Appearance[] = [
+  /*
   {
     id: "eter",
     event: "Éter",
@@ -142,7 +143,6 @@ export const appearances: Appearance[] = [
           en: "Photo of VANDORT performing at Eter",
         },
       },
-
       {
         id: "eter-vid-02",
         type: "video",
@@ -159,6 +159,65 @@ export const appearances: Appearance[] = [
         alt: {
           es: "Foto de VANDORT durante su presentación en Eter",
           en: "Photo of VANDORT performing at Eter",
+        },
+      },
+
+    ],
+  },
+  */
+ {
+    id: "gothnight",
+    event: "Goth Night",
+    detail: {
+      es: "15 Agosto 2026",
+      en: "August 15th 2026",
+    },
+    city: "Monterrey",
+    media: [
+      {
+        id: "gn-photo-01",
+        type: "image",
+        src: "/media/appearances/goth_n/goth_n1.jpg",
+        alt: {
+          es: "Flyer de V Goth Night",
+          en: "Flyer of Goth Night",
+        },
+      },
+      {
+        id: "gn-photo-02",
+        type: "image",
+        src: "/media/appearances/goth_n/goth_n2.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Goth Night",
+          en: "Foto of VANDORT performing at Goth Night",
+        },
+      },
+
+      {
+        id: "gn-photo-03",
+        type: "image",
+        src: "/media/appearances/goth_n/goth_n3.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Goth night",
+          en: "Photo of VANDORT performing at Goth Night",
+        },
+      },
+      {
+        id: "gn-photo-04",
+        type: "image",
+        src: "/media/appearances/goth_n/goth_n4.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en goTH nIGHT",
+          en: "Photo of VANDORT performing at Goth Night",
+        },
+      },
+      {
+        id: "gn-photo-05",
+        type: "image",
+        src: "/media/appearances/goth_n/goth_n5.jpg",
+        alt: {
+          es: "Foto de VANDORT durante su presentación en Goth Noght",
+          en: "Photo of VANDORT performing at Goth Night",
         },
       },
 

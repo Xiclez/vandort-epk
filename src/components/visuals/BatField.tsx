@@ -115,18 +115,18 @@ export function BatField({
                 ? 30 + ((i * 11) % 36)
                 : 26 + ((i * 13) % 32);
 
-        const visibleOpacity =
-          mode === "splash"
-            ? 0.88
-            : mode === "hero"
-              ? 0.66
-              : 0.72;
-
-        const batColor =
-          i % 3 === 0
-            ? "rgba(238, 233, 225, 0.88)"
-            : "rgba(194, 190, 184, 0.76)";
-
+                const visibleOpacity =
+                mode === "splash"
+                  ? 0.92
+                  : mode === "hero"
+                    ? 0.82
+                    : 0.86;
+              
+              const batColor =
+                i % 2 === 0
+                  ? "rgba(0, 0, 0, 0.96)"
+                  : "rgba(8, 8, 8, 0.92)";
+                  
         const ambientX = [
           0,
           12 + (i % 3) * 4,
@@ -153,9 +153,9 @@ export function BatField({
                 top: `${top}%`,
                 width: size,
                 color: batColor,
-                opacity: 0.58,
+                opacity: 0.72,
                 filter:
-                  "drop-shadow(0 2px 3px rgba(0,0,0,0.95))",
+                  "drop-shadow(0 1px 2px rgba(255,255,255,0.08))",
               }}
             >
               <Bat className="h-auto w-full" />
@@ -173,7 +173,7 @@ export function BatField({
               width: size,
               color: batColor,
               filter:
-                "drop-shadow(0 3px 5px rgba(0,0,0,0.95)) drop-shadow(0 0 7px rgba(238,233,225,0.14))",
+                "drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 4px rgba(255,255,255,0.06))",
             }}
             initial={
               mode === "hero"
